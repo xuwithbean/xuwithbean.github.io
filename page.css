@@ -1,0 +1,29 @@
+.html,body {
+	height:100%;
+}
+body,ul,li,a,p,div{padding:0px; margin:0px; font-size:14px;}
+.wrap {
+	overflow: hidden;
+	width:100%;
+}
+.main {
+	height:2944px;
+	top:0;
+	position: relative;
+}
+.page {
+	width:100%;
+	margin:0;
+}
+.page1 {
+	background:#E4E6CE;
+}
+.page2 {
+	background:#6CE26C;
+}
+.page3 {
+	background:#BF4938;
+}
+.page4 {
+	background:#2932E1;
+}
