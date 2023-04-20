@@ -1,0 +1,17 @@
+.background1 {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      min-width: 1000px;
+      z-index: -10;
+      zoom: 1;
+      background-color: #fff;
+      background-image: url("https://raw.githubusercontent.com/xuwithbean/xuwithbean.github.io/main/pidtures/ownwebsite.jpg") ;
+      background-repeat: no-repeat;
+      background-size: cover;
+      -webkit-background-size: cover;
+      -o-background-size: cover;
+      background-position: center 0;
+    }
