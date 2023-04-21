@@ -8,7 +8,7 @@
       z-index: -10;
       zoom: 1;
       background-color: #fff;
-      background-image: url("https://raw.githubusercontent.com/xuwithbean/xuwithbean.github.io/main/ownwebsite.jpg") ;
+      background-image: "ownwebsite.jpg" ;
       background-repeat: no-repeat;
       background-size: cover;
       -webkit-background-size: cover;
