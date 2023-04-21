@@ -10,7 +10,7 @@
       background-color: #fff;
       background-image: url("https://raw.githubusercontent.com/xuwithbean/xuwithbean.github.io/main/ownwebsite.jpg") ;
       background-repeat: no-repeat;
-      background-size: cover;
+      background-size: 100%;
       -webkit-background-size: cover;
       -o-background-size: cover;
       background-position: center 0;
