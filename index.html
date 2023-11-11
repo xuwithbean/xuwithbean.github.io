@@ -1,22 +1,431 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<link rel="shortcut icon" href= "headpic.ico" type="image/x-icon">
-<title>xuwithbean</title>
-<style type="text/css">
-  @import  "./backgrounds/background1.css";
-  @import  "./position/position.css";
-</style>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <!--Page Title-->
+    <title>xuwithbean</title>
+
+    <!--Meta Keywords and Description-->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+
+    <!--icon-->
+    <link rel="shortcut icon" href="images/headpic.ico" title="xu"/>
+
+    <!-- Main CSS Files -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Namari Color CSS -->
+    <link rel="stylesheet" href="css/namari-color.css">
+    <link rel="stylesheet" href="css/color.css">
+
+    <!--Icon Fonts - Font Awesome Icons-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Animate CSS-->
+    <link href="css/animate.css" rel="stylesheet" type="text/css">
+
+    <!--Google Webfonts-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div class="background1"></div>
-<img src="./pictures/headpic.bmp" width="128" height="128">
-<h1>xuwibean简介</h1>
-<p>xuwithbean是一只鼠鼠</p>
-<p>该网页是xuwithbean为了xjturobocon而做的测试网页，已经完成功能</p>
-<h2>xuwithbean打CSGO很强，他的大狙可以看住A大</h2>
-<div id="footer" class="con">
-版权 ©xuwithbean.github.io</div>
+
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status" class="la-ball-triangle-path">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!--End of Preloader-->
+
+<div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
+    <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
+    <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
+    <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
+    <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+</div>
+
+<div id="wrapper">
+
+    <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
+        <div id="header" class="nav-collapse">
+            <div class="row clearfix">
+                <div class="col-1">
+
+                    <!--Logo-->
+                    <div id="logo">
+
+                        <!--Logo that is shown on the banner-->
+                        <img src="images/xu.jpg" id="banner-logo" alt="Landing Page"/>
+                        <!--End of Banner Logo-->
+
+                        <!--The Logo that is shown on the sticky Navigation Bar-->
+                        <img src="images/xu.jpg" id="navigation-logo" alt="Landing Page"/>
+                        <!--End of Navigation Logo-->
+
+                    </div>
+                    <!--End of Logo-->
+
+                    <aside>
+
+                        <!--Social Icons in Header-->
+                        <ul class="social-icons">
+                            <li>
+                                <a target="_pink" title="CNBLOGS" href="https://www.cnblogs.com/xuwithbean">
+                                    <i class="fa fa-code fa-1x"></i><span>CNBLOGS</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a target="_blank" title="GITHUB" href="https://github.com/xuwithbean">
+                                    <i class="fa fa-github fa-1x"></i><span>GITHUB</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <!--End of Social Icons in Header-->
+
+                    </aside>
+
+                    <!--Main Navigation-->
+                    <nav id="nav-main">
+                        <ul>
+                            <li>
+                                <a href="#banner"><div class="colorpink">Home</div></a>
+                            </li>
+                            <li>
+                                <a href="#about"><div class="colorpink">About</div></a>
+                            </li>
+                            <li>
+                                <a href="#gallery"><div class="colorpink">Gallery</div></a>
+                            </li>
+                            <li>
+                                <a href="#services"><div class="colorpink">Introduction</div></a>
+                            </li>
+                            <li>
+                                <a href="#testimonials"><div class="colorpink">interests</div></a>
+                            </li>
+                            <li>
+                                <a href="#clients"><div class="colorpink">Games</div></a>
+                            </li>
+                            <li>
+                                <a href="#pricing"><div class="colorpink">Unlimited</div></a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!--End of Main Navigation-->
+
+                    <div id="nav-trigger"><span></span></div>
+                    <nav id="nav-mobile"></nav>
+
+                </div>
+            </div>
+        </div><!--End of Header-->
+
+        <!--Banner Content-->
+        <div id="banner-content" class="row clearfix">
+
+            <div class="col-38">
+
+                <div class="section-heading">
+                    <h1>
+                      <div class="colorpink">
+                        xuwithbean
+                      </div>
+                    </h1>
+                    <h2>
+                      <div class="colorpink">
+                        xuwithbean is study now~
+                      </div>
+                    </h2>
+                </div>
+
+                <!--Call to Action-->
+                <a href="#" class="button"><div class="colorpink">START CREATING TODAY</div></a>
+                <!--End Call to Action-->
+
+            </div>
+
+        </div><!--End of Row-->
+    </header>
+
+    <!--Main Content Area-->
+    <main id="content">
+
+        <!--Introduction-->
+        <section id="about" class="introduction scrollto">
+
+            <div class="row clearfix">
+
+                <div class="col-3">
+                    <div class="section-heading">
+                        <h3>WHAT YOU CAN GET</h3>
+                        <h2 class="section-title">What you can get from xuwithbean</h2>
+                        <p class="section-subtitle">
+                          xuwithbean has some projects had bean finished,you can get them form his github.
+                          xuwithbean also written a lot of articles which you can learn something from.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="col-2-3">
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.1s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-github fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Github</h4>
+                            <p>xuwithbean create some projects and repositories here and it may give you some ideas</p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                    <!--Icon Block-->
+                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.3s">
+                        <!--Icon-->
+                        <div class="icon">
+                            <i class="fa fa-code fa-2x"></i>
+                        </div>
+                        <!--Icon Block Description-->
+                        <div class="icon-block-description">
+                            <h4>Cnblogs</h4>
+                            <p>xuwithbean has some articles about Linux,ROS,Raspberry pi here and you may learn something here</p>
+                        </div>
+                    </div>
+                    <!--End of Icon Block-->
+
+                </div>
+
+            </div>
+
+
+        </section>
+        <!--End of Introduction-->
+
+
+        <!--Gallery-->
+        <aside id="gallery" class="row text-center scrollto clearfix" data-featherlight-gallery
+                 data-featherlight-filter="a">
+
+                <a href="images/gallery-images/con.png" data-featherlight="image" class="col-3 wow fadeIn"
+                  data-wow-delay="0.1s"><img src="images/gallery-images/con.png" alt="Landing Page"/></a>
+                <a href="images/gallery-images/1_BigPic.jpg" data-featherlight="image" class="col-3 wow fadeIn"
+                  data-wow-delay="0.3s"><img src="images/gallery-images/1_BigPic.jpg" alt="Landing Page"/></a>
+                <a href="images/gallery-images/fei.jpg" data-featherlight="image" class="col-3 wow fadeIn"
+                  data-wow-delay="1.1s"><img src="images/gallery-images/fei.jpg" alt="Landing Page"/></a>
+
+        </aside>
+        <!--End of Gallery-->
+
+
+        <!--Content Section-->
+        <div id="services" class="scrollto clearfix">
+
+            <div class="row no-padding-bottom clearfix">
+
+
+                <!--Content Left Side-->
+                <div class="col-3">
+                    <!--User Testimonial-->
+                    <blockquote class="testimonial text-right bigtest">
+                        <q>
+                          Under the weight of all the qualities I lack,
+                          And I know it's time to change,
+                          It's time to finally act my age!
+                        </q>
+                        <footer>—Blitz Kids,On My Own </footer>
+                    </blockquote>
+                    <!-- End of Testimonial-->
+
+                </div>
+                <!--End Content Left Side-->
+
+                <!--Content of the Right Side-->
+                <div class="col-3">
+                    <div class="section-heading">
+                        <h3>Selfintroduction</h3>
+                        <h2 class="section-title">Focusing On What Matters Most</h2>
+                        <p class="section-subtitle">
+                          xuwithbean is a lover of robot and IT,who always do something small but interesting about IC or do some interesting codes.Sometimes 
+                          xuwithbean will also make videos
+                        </p>
+                    </div>
+                </div>
+                <!--End Content Right Side-->
+
+                <div class="col-3">
+                    <img src="images/sai.jpg" alt="Dancer"/>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!--End of Content Section-->
+
+        <!--Testimonials-->
+        <aside id="testimonials" class="scrollto text-center" data-enllax-ratio=".2">
+
+            <div class="row clearfix">
+
+                <div class="section-heading">
+                    <h3>WHAT xuwithbean LIKE</h3>
+                    <h2 class="section-title">Here are what xuwithbean is interesting in</h2>
+                </div>
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/1.jpg" alt="User"/>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/2.jpg" alt="User"/>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/3.jpg" alt="User"/>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/4.jpg" alt="User"/>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/5.jpg" alt="User"/>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/6.jpg" alt="User"/>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/7.jpg" alt="User"/>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/8.jpg" alt="User"/>
+                </blockquote>
+                <!-- End of Testimonial-->
+
+                <!--User Testimonial-->
+                <blockquote class="col-3 testimonial classic">
+                    <img src="images/user-images/9.jpg" alt="User"/>
+                </blockquote>
+                <!-- End of Testimonial-->
+            </div>
+
+        </aside>
+        <!--End of Testimonials-->
+
+        <!--Clients-->
+        <section id="clients" class="scrollto clearfix">
+            <div class="row clearfix">
+
+                <div class="col-3">
+
+                    <div class="section-heading">
+                        <h3>Game Time!</h3>
+                        <h2 class="section-title">The Game xuwithbean Play</h2>
+                        <p class="section-subtitle">
+                          xuwithbean like play games and always play games with others.If you like play game as well,may would you be a good friend with xuwithbean 
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="col-2-3">
+                    <a href="#" class="col-3">
+                        <img src="images/company-images/arti.jpg" alt="Company"/>
+                        <div class="client-overlay"><span>arti</span></div>
+                    </a>
+                    <a href="#" class="col-3">
+                        <img src="images/company-images/terraria.jpg" alt="Company"/>
+                        <div class="client-overlay"><span>Terraria</span></div>
+                    </a>
+                    <a href="#" class="col-3">
+                        <img src="images/company-images/cs.jpg" alt="Company"/>
+                        <div class="client-overlay"><span>CS2</span></div>
+                    </a>
+                    <a href="#" class="col-3">
+                        <img src="images/company-images/ds.jpg" alt="Company"/>
+                        <div class="client-overlay"><span>Don't Starve</span></div>
+                    </a>
+                    <a href="#" class="col-3">
+                        <img src="images/company-images/rr.jpg" alt="Company"/>
+                        <div class="client-overlay"><span>Riders Republic</span></div>
+                    </a>
+                    <a href="#" class="col-3">
+                      <img src="images/company-images/pz.jpg" alt="Company"/>
+                      <div class="client-overlay"><span>Project Zombie</span></div>
+                  </a>
+                </div>
+
+            </div>
+        </section>
+        <!--End of Clients-->
+    </main>
+    <!--End Main Content Area-->
+
+
+    <!--Footer-->
+    <footer id="landing-footer" class="clearfix">
+        <div class="row clearfix">
+
+            <p id="copyright" class="col-2">Made with love by <a href="https://www.shapingrain.com">ShapingRain</a></p>
+
+            <!--Social Icons in Footer-->
+            <ul class="col-2 social-icons">
+                <li>
+                    <a target="_blank" title="CNBLOGS" href="https://www.cnblogs.com/xuwithbean">
+                        <i class="fa fa-code fa-1x"></i><span>CNBLOGS</span>
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" title="GITHUB" href="https://github.com/xuwithbean">
+                        <i class="fa fa-github fa-1x"></i><span>GITHUB</span>
+                    </a>
+                </li>
+            </ul>
+            <!--End of Social Icons in Footer-->
+        </div>
+    </footer>
+    <!--End of Footer-->
+
+</div>
+
+<!-- Include JavaScript resources -->
+<script src="js/jquery.1.8.3.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/featherlight.min.js"></script>
+<script src="js/featherlight.gallery.min.js"></script>
+<script src="js/jquery.enllax.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/jquery.stickyNavbar.min.js"></script>
+<script src="js/jquery.waypoints.min.js"></script>
+<script src="js/images-loaded.min.js"></script>
+<script src="js/lightbox.min.js"></script>
+<script src="js/site.js"></script>
 </body>
 </html>
