@@ -1,431 +1,244 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-
-    <!--Page Title-->
-    <title>xuwithbean</title>
-
-    <!--Meta Keywords and Description-->
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-
-    <!--icon-->
-    <link rel="shortcut icon" href="images/headpic.ico" title="xu"/>
-
-    <!-- Main CSS Files -->
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Namari Color CSS -->
-    <link rel="stylesheet" href="css/namari-color.css">
-    <link rel="stylesheet" href="css/color.css">
-
-    <!--Icon Fonts - Font Awesome Icons-->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-
-    <!-- Animate CSS-->
-    <link href="css/animate.css" rel="stylesheet" type="text/css">
-
-    <!--Google Webfonts-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>xuwithbean</title>
+<meta name="description" content="AI · Robotics · Embedded">
+<link rel="icon" href="images/headpic.ico">
+<style>
+* { margin:0;padding:0;box-sizing:border-box; }
+.cursor-star {
+  position:fixed;z-index:999;pointer-events:none;width:12px;height:12px;
+  background:#fff;border-radius:50%;transform:translate(-50%,-50%);
+  box-shadow:0 0 8px #64b4ff,0 0 20px #64b4ff,0 0 40px rgba(100,180,255,0.6);
+  transition:width .2s,height .2s;
+}
+.cursor-halo {
+  position:fixed;z-index:998;pointer-events:none;width:40px;height:40px;
+  border:1px solid rgba(100,180,255,0.4);border-radius:50%;
+  transform:translate(-50%,-50%);animation:haloPulse 2s ease-in-out infinite;
+}
+@keyframes haloPulse {
+  0%,100%{transform:translate(-50%,-50%)scale(1);opacity:.6}
+  50%{transform:translate(-50%,-50%)scale(1.3);opacity:1}
+}
+.cursor-star.hover{width:20px;height:20px}
+body{cursor:none;background:#000;color:#c0c8e0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;overflow:hidden;height:100vh;-webkit-font-smoothing:antialiased;user-select:none}
+#globe{position:fixed;inset:0;z-index:0;transition:filter .8s}
+#globe.blurred{filter:blur(8px)brightness(.4)}
+#hero{position:fixed;inset:0;z-index:-1;display:flex;align-items:center;justify-content:center;flex-direction:column;pointer-events:none;filter:blur(2px);opacity:.35;transition:opacity .5s}
+#hero.hidden{opacity:.1}
+.hero-name{font-size:clamp(40px,7vw,72px);font-weight:900;letter-spacing:-.04em;color:#fff;text-shadow:0 0 60px rgba(100,180,255,0.4),0 0 120px rgba(100,180,255,0.15);margin-bottom:12px}
+.hero-sub{font-size:15px;color:rgba(150,200,255,0.5);letter-spacing:.12em;font-weight:300}
+.hud{position:fixed;z-index:10;pointer-events:none;font-family:'SF Mono','Fira Code',monospace;font-size:10px;color:rgba(100,180,255,0.5);letter-spacing:.06em}
+.hud-tl{top:20px;left:28px}
+.hud-tr{top:20px;right:28px;text-align:right}
+.hud-bl{bottom:20px;left:28px}
+.hud-br{bottom:20px;right:28px;text-align:right;pointer-events:auto}
+.hud em{font-style:normal;color:#64b4ff}
+#overlay{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .5s}
+#overlay.open{opacity:1;pointer-events:auto}
+.overlay-card{background:rgba(8,12,26,0.75);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border:1px solid rgba(100,180,255,0.15);border-radius:20px;padding:48px 56px 48px 48px;max-width:520px;width:90vw;max-height:80vh;overflow-y:auto;transform:scale(.9)translateY(20px);transition:transform .5s cubic-bezier(.16,1,.3,1);position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.6),0 0 40px rgba(100,180,255,0.08);scrollbar-width:none}
+.overlay-card::-webkit-scrollbar{display:none}
+#overlay.open .overlay-card{transform:scale(1)translateY(0)}
+.overlay-tag{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:#64b4ff;margin-bottom:8px;font-family:'SF Mono',monospace}
+.overlay-title{font-size:28px;font-weight:700;color:#fff;margin-bottom:28px;letter-spacing:-.02em}
+.overlay-body{font-size:14px;line-height:1.8;color:#8899bb}
+.overlay-body strong{color:#fff}
+.overlay-close{position:absolute;top:18px;right:18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.overlay-close:hover{border-color:#64b4ff;background:rgba(100,180,255,0.1)}
+.overlay-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.overlay-stat{background:rgba(100,180,255,0.04);border:1px solid rgba(100,180,255,0.08);border-radius:10px;padding:16px;text-align:center}
+.overlay-stat-num{font-size:24px;font-weight:700;color:#64b4ff;font-family:'SF Mono',monospace}
+.overlay-stat-label{font-size:10px;color:#6688aa;margin-top:4px;text-transform:uppercase;letter-spacing:.08em}
+.overlay-tech{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.overlay-tech-item{background:rgba(100,180,255,0.05);border:1px solid rgba(100,180,255,0.08);border-radius:8px;padding:7px 14px;font-size:12px;color:#8899bb}
+.overlay-projects{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.overlay-project{background:rgba(100,180,255,0.03);border:1px solid rgba(100,180,255,0.06);border-radius:12px;padding:16px;display:block;color:inherit;text-decoration:none;transition:all .3s}
+.overlay-project:hover{border-color:rgba(100,180,255,0.3)}
+.overlay-project-name{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+.overlay-project-desc{font-size:12px;color:#8899bb;line-height:1.5}
+.overlay-project-meta{font-size:11px;color:#6688aa;margin-top:6px}
+.legend-item{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;color:rgba(255,255,255,0.5);cursor:pointer;transition:color .3s;letter-spacing:.08em;padding:4px 8px;border-radius:6px}
+.legend-item:hover{color:#fff;background:rgba(100,180,255,0.08)}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.scroll-lever-track{position:fixed;pointer-events:none;width:4px;background:rgba(100,180,255,0.08);border-radius:2px;opacity:0;transition:opacity .3s;z-index:101}
+.scroll-lever-track.visible{opacity:1}
+.scroll-lever-thumb{position:absolute;left:-8px;width:20px;height:40px;background:linear-gradient(180deg,rgba(100,180,255,0.3),rgba(100,180,255,0.6),rgba(100,180,255,0.3));border:1px solid rgba(100,180,255,0.4);border-radius:4px;cursor:grab;box-shadow:0 0 12px rgba(100,180,255,0.3);transition:box-shadow .3s;pointer-events:auto;z-index:5}
+.scroll-lever-thumb:hover,.scroll-lever-thumb:active{box-shadow:0 0 24px rgba(100,180,255,0.5)}
+.scroll-lever-thumb:active{cursor:grabbing}
+.scroll-lever-thumb::before,.scroll-lever-thumb::after{content:'';position:absolute;left:-4px;width:28px;height:1px;background:rgba(100,180,255,0.3)}
+.scroll-lever-thumb::before{top:8px}
+.scroll-lever-thumb::after{bottom:8px}
+.overlay-card::-webkit-scrollbar{width:4px}
+.overlay-card::-webkit-scrollbar-track{background:transparent}
+.overlay-card::-webkit-scrollbar-thumb{background:rgba(100,180,255,0.2);border-radius:2px}
+@media(max-width:768px){.section{padding:60px 20px}.section-title{font-size:26px}.projects-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
-<!-- Preloader -->
-<div id="preloader">
-    <div id="status" class="la-ball-triangle-path">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-<!--End of Preloader-->
-
-<div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
-    <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
-    <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
-    <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
-    <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
-</div>
-
-<div id="wrapper">
-
-    <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
-        <div id="header" class="nav-collapse">
-            <div class="row clearfix">
-                <div class="col-1">
-
-                    <!--Logo-->
-                    <div id="logo">
-
-                        <!--Logo that is shown on the banner-->
-                        <img src="images/xu.jpg" id="banner-logo" alt="Landing Page"/>
-                        <!--End of Banner Logo-->
-
-                        <!--The Logo that is shown on the sticky Navigation Bar-->
-                        <img src="images/xu.jpg" id="navigation-logo" alt="Landing Page"/>
-                        <!--End of Navigation Logo-->
-
-                    </div>
-                    <!--End of Logo-->
-
-                    <aside>
-
-                        <!--Social Icons in Header-->
-                        <ul class="social-icons">
-                            <li>
-                                <a target="_pink" title="CNBLOGS" href="https://www.cnblogs.com/xuwithbean">
-                                    <i class="fa fa-code fa-1x"></i><span>CNBLOGS</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a target="_blank" title="GITHUB" href="https://github.com/xuwithbean">
-                                    <i class="fa fa-github fa-1x"></i><span>GITHUB</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <!--End of Social Icons in Header-->
-
-                    </aside>
-
-                    <!--Main Navigation-->
-                    <nav id="nav-main">
-                        <ul>
-                            <li>
-                                <a href="#banner"><div class="colorpink">Home</div></a>
-                            </li>
-                            <li>
-                                <a href="#about"><div class="colorpink">About</div></a>
-                            </li>
-                            <li>
-                                <a href="#gallery"><div class="colorpink">Gallery</div></a>
-                            </li>
-                            <li>
-                                <a href="#services"><div class="colorpink">Introduction</div></a>
-                            </li>
-                            <li>
-                                <a href="#testimonials"><div class="colorpink">interests</div></a>
-                            </li>
-                            <li>
-                                <a href="#clients"><div class="colorpink">Games</div></a>
-                            </li>
-                            <li>
-                                <a href="#pricing"><div class="colorpink">Unlimited</div></a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <!--End of Main Navigation-->
-
-                    <div id="nav-trigger"><span></span></div>
-                    <nav id="nav-mobile"></nav>
-
-                </div>
-            </div>
-        </div><!--End of Header-->
-
-        <!--Banner Content-->
-        <div id="banner-content" class="row clearfix">
-
-            <div class="col-38">
-
-                <div class="section-heading">
-                    <h1>
-                      <div class="colorpink">
-                        xuwithbean
-                      </div>
-                    </h1>
-                    <h2>
-                      <div class="colorpink">
-                        xuwithbean is study now~
-                      </div>
-                    </h2>
-                </div>
-
-                <!--Call to Action-->
-                <a href="#" class="button"><div class="colorpink">START CREATING TODAY</div></a>
-                <!--End Call to Action-->
-
-            </div>
-
-        </div><!--End of Row-->
-    </header>
-
-    <!--Main Content Area-->
-    <main id="content">
-
-        <!--Introduction-->
-        <section id="about" class="introduction scrollto">
-
-            <div class="row clearfix">
-
-                <div class="col-3">
-                    <div class="section-heading">
-                        <h3>WHAT YOU CAN GET</h3>
-                        <h2 class="section-title">What you can get from xuwithbean</h2>
-                        <p class="section-subtitle">
-                          xuwithbean has some projects had bean finished,you can get them form his github.
-                          xuwithbean also written a lot of articles which you can learn something from.
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="col-2-3">
-
-                    <!--Icon Block-->
-                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.1s">
-                        <!--Icon-->
-                        <div class="icon">
-                            <i class="fa fa-github fa-2x"></i>
-                        </div>
-                        <!--Icon Block Description-->
-                        <div class="icon-block-description">
-                            <h4>Github</h4>
-                            <p>xuwithbean create some projects and repositories here and it may give you some ideas</p>
-                        </div>
-                    </div>
-                    <!--End of Icon Block-->
-
-                    <!--Icon Block-->
-                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.3s">
-                        <!--Icon-->
-                        <div class="icon">
-                            <i class="fa fa-code fa-2x"></i>
-                        </div>
-                        <!--Icon Block Description-->
-                        <div class="icon-block-description">
-                            <h4>Cnblogs</h4>
-                            <p>xuwithbean has some articles about Linux,ROS,Raspberry pi here and you may learn something here</p>
-                        </div>
-                    </div>
-                    <!--End of Icon Block-->
-
-                </div>
-
-            </div>
-
-
-        </section>
-        <!--End of Introduction-->
-
-
-        <!--Gallery-->
-        <aside id="gallery" class="row text-center scrollto clearfix" data-featherlight-gallery
-                 data-featherlight-filter="a">
-
-                <a href="images/gallery-images/con.png" data-featherlight="image" class="col-3 wow fadeIn"
-                  data-wow-delay="0.1s"><img src="images/gallery-images/55x.jpg" alt="Landing Page"/></a>
-                <a href="images/gallery-images/1_BigPic.jpg" data-featherlight="image" class="col-3 wow fadeIn"
-                  data-wow-delay="0.3s"><img src="images/gallery-images/1_BigPic.jpg" alt="Landing Page"/></a>
-                <a href="images/gallery-images/fei.jpg" data-featherlight="image" class="col-3 wow fadeIn"
-                  data-wow-delay="1.1s"><img src="images/gallery-images/fei.jpg" alt="Landing Page"/></a>
-
-        </aside>
-        <!--End of Gallery-->
-
-
-        <!--Content Section-->
-        <div id="services" class="scrollto clearfix">
-
-            <div class="row no-padding-bottom clearfix">
-
-
-                <!--Content Left Side-->
-                <div class="col-3">
-                    <!--User Testimonial-->
-                    <blockquote class="testimonial text-right bigtest">
-                        <q>
-                          Under the weight of all the qualities I lack,
-                          And I know it's time to change,
-                          It's time to finally act my age!
-                        </q>
-                        <footer>—Blitz Kids,On My Own </footer>
-                    </blockquote>
-                    <!-- End of Testimonial-->
-
-                </div>
-                <!--End Content Left Side-->
-
-                <!--Content of the Right Side-->
-                <div class="col-3">
-                    <div class="section-heading">
-                        <h3>Selfintroduction</h3>
-                        <h2 class="section-title">Focusing On What Matters Most</h2>
-                        <p class="section-subtitle">
-                          xuwithbean is a lover of robot and IT,who always do something small but interesting about IC or do some interesting codes.Sometimes 
-                          xuwithbean will also make videos
-                        </p>
-                    </div>
-                </div>
-                <!--End Content Right Side-->
-
-                <div class="col-3">
-                    <img src="images/sai.jpg" alt="Dancer"/>
-                </div>
-
-            </div>
-
-
-        </div>
-        <!--End of Content Section-->
-
-        <!--Testimonials-->
-        <aside id="testimonials" class="scrollto text-center" data-enllax-ratio=".2">
-
-            <div class="row clearfix">
-
-                <div class="section-heading">
-                    <h3>WHAT xuwithbean LIKE</h3>
-                    <h2 class="section-title">Here are what xuwithbean is interesting in</h2>
-                </div>
-
-                <!--User Testimonial-->
-                <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/1.jpg" alt="User"/>
-                </blockquote>
-                <!-- End of Testimonial-->
-
-                <!--User Testimonial-->
-                <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/2.jpg" alt="User"/>
-                </blockquote>
-                <!-- End of Testimonial-->
-
-                <!--User Testimonial-->
-                <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/3.jpg" alt="User"/>
-                </blockquote>
-                <!-- End of Testimonial-->
-
-                <!--User Testimonial-->
-                <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/4.jpg" alt="User"/>
-                </blockquote>
-                <!-- End of Testimonial-->
-
-                <!--User Testimonial-->
-                <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/5.jpg" alt="User"/>
-                </blockquote>
-                <!-- End of Testimonial-->
-
-                <!--User Testimonial-->
-                <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/6.jpg" alt="User"/>
-                </blockquote>
-                <!-- End of Testimonial-->
-
-                <!--User Testimonial-->
-                <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/7.jpg" alt="User"/>
-                </blockquote>
-                <!-- End of Testimonial-->
-
-                <!--User Testimonial-->
-                <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/8.jpg" alt="User"/>
-                </blockquote>
-                <!-- End of Testimonial-->
-
-                <!--User Testimonial-->
-                <blockquote class="col-3 testimonial classic">
-                    <img src="images/user-images/9.jpg" alt="User"/>
-                </blockquote>
-                <!-- End of Testimonial-->
-            </div>
-
-        </aside>
-        <!--End of Testimonials-->
-
-        <!--Clients-->
-        <section id="clients" class="scrollto clearfix">
-            <div class="row clearfix">
-
-                <div class="col-3">
-
-                    <div class="section-heading">
-                        <h3>Game Time!</h3>
-                        <h2 class="section-title">The Game xuwithbean Play</h2>
-                        <p class="section-subtitle">
-                          xuwithbean like play games and always play games with others.If you like play game as well,may would you be a good friend with xuwithbean 
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="col-2-3">
-                    <a href="#" class="col-3">
-                        <img src="images/company-images/arti.jpg" alt="Company"/>
-                        <div class="client-overlay"><span>arti</span></div>
-                    </a>
-                    <a href="#" class="col-3">
-                        <img src="images/company-images/terraria.jpg" alt="Company"/>
-                        <div class="client-overlay"><span>Terraria</span></div>
-                    </a>
-                    <a href="#" class="col-3">
-                        <img src="images/company-images/cs.jpg" alt="Company"/>
-                        <div class="client-overlay"><span>CS2</span></div>
-                    </a>
-                    <a href="#" class="col-3">
-                        <img src="images/company-images/ds.jpg" alt="Company"/>
-                        <div class="client-overlay"><span>Don't Starve</span></div>
-                    </a>
-                    <a href="#" class="col-3">
-                        <img src="images/company-images/rr.jpg" alt="Company"/>
-                        <div class="client-overlay"><span>Riders Republic</span></div>
-                    </a>
-                    <a href="#" class="col-3">
-                      <img src="images/company-images/pz.jpg" alt="Company"/>
-                      <div class="client-overlay"><span>Project Zombie</span></div>
-                  </a>
-                </div>
-
-            </div>
-        </section>
-        <!--End of Clients-->
-    </main>
-    <!--End Main Content Area-->
-
-
-    <!--Footer-->
-    <footer id="landing-footer" class="clearfix">
-        <div class="row clearfix">
-
-            <p id="copyright" class="col-2">©<a href="https://github.com/xuwithbean">xuwithbean</a></p>
-
-            <!--Social Icons in Footer-->
-            <ul class="col-2 social-icons">
-                <li>
-                    <a target="_blank" title="CNBLOGS" href="https://www.cnblogs.com/xuwithbean">
-                        <i class="fa fa-code fa-1x"></i><span>CNBLOGS</span>
-                    </a>
-                </li>
-                <li>
-                    <a target="_blank" title="GITHUB" href="https://github.com/xuwithbean">
-                        <i class="fa fa-github fa-1x"></i><span>GITHUB</span>
-                    </a>
-                </li>
-            </ul>
-            <!--End of Social Icons in Footer-->
-        </div>
-    </footer>
-    <!--End of Footer-->
-
+<div class="cursor-star" id="cs"></div>
+<div class="cursor-halo" id="ch"></div>
+<canvas id="globe"></canvas>
+<div id="hero"><div class="hero-name">xuwithbean</div><div class="hero-sub">AI INFRA · RL · LLM · ROBOTICS · EMBEDDED</div></div>
+<div class="hud hud-tl"><div>GH <em id="ghFollowers">--</em></div><div>BL <em id="blFollowers">--</em></div><div>FPS <em id="fps">--</em></div><div>LAT <em id="hudLat">--</em></div><div>LNG <em id="hudLng">--</em></div></div>
+<div class="hud hud-tr"><div>REPOS <em id="hudRepos">--</em></div><div>STARS <em id="hudStars">--</em></div></div>
+<div class="hud hud-bl"><div>SYS <em>ONLINE</em></div></div>
+<div class="hud hud-br" id="legend"></div>
+
+<div id="overlay">
+  <div class="overlay-card">
+    <button class="overlay-close" onclick="closeOverlay()">✕</button>
+    <div class="overlay-tag" id="ov-tag"></div>
+    <div class="overlay-title" id="ov-title"></div>
+    <div class="overlay-body" id="ov-body"></div>
+  </div>
+  <div class="scroll-lever-track" id="leverTrack"><div class="scroll-lever-thumb" id="lever"></div></div>
 </div>
 
-<!-- Include JavaScript resources -->
-<script src="js/jquery.1.8.3.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/featherlight.min.js"></script>
-<script src="js/featherlight.gallery.min.js"></script>
-<script src="js/jquery.enllax.min.js"></script>
-<script src="js/jquery.scrollUp.min.js"></script>
-<script src="js/jquery.easing.min.js"></script>
-<script src="js/jquery.stickyNavbar.min.js"></script>
-<script src="js/jquery.waypoints.min.js"></script>
-<script src="js/images-loaded.min.js"></script>
-<script src="js/lightbox.min.js"></script>
-<script src="js/site.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+const canvas=document.getElementById('globe');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(1);
+renderer.setSize(innerWidth,innerHeight);
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(40,innerWidth/innerHeight,0.5,100);
+camera.position.set(0,0,10);
+const R=3;
+
+// Stars — 2-layer twinkling
+const starGroup=new THREE.Group();scene.add(starGroup);
+const starData=[];
+for(let L=0;L<2;L++){
+  const n=400+L*300,g=new THREE.BufferGeometry(),p=new Float32Array(n*3),c=new Float32Array(n*3);
+  for(let i=0;i<n;i++){p[i*3]=(Math.random()-.5)*70;p[i*3+1]=(Math.random()-.5)*70;p[i*3+2]=-10-L*10-Math.random()*15;const cl=new THREE.Color().setHSL(.58,0.2,.5+Math.random()*.5);c[i*3]=cl.r;c[i*3+1]=cl.g;c[i*3+2]=cl.b}
+  g.setAttribute('position',new THREE.BufferAttribute(p,3));g.setAttribute('color',new THREE.BufferAttribute(c,3));
+  const m=new THREE.PointsMaterial({size:.04+L*.03,vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.5+L*.15});
+  const pts=new THREE.Points(g,m);starGroup.add(pts);starData.push({pts,baseSize:m.size});
+}
+const brightCount=80,brightGeo=new THREE.BufferGeometry(),bp=new Float32Array(brightCount*3),bc=new Float32Array(brightCount*3),bph=new Float32Array(brightCount);
+for(let i=0;i<brightCount;i++){bp[i*3]=(Math.random()-.5)*60;bp[i*3+1]=(Math.random()-.5)*60;bp[i*3+2]=-5-Math.random()*25;const cl=new THREE.Color().setHSL(.57,.2,.85);bc[i*3]=cl.r;bc[i*3+1]=cl.g;bc[i*3+2]=cl.b;bph[i]=Math.random()*Math.PI*2}
+brightGeo.setAttribute('position',new THREE.BufferAttribute(bp,3));brightGeo.setAttribute('color',new THREE.BufferAttribute(bc,3));
+const brightStars=new THREE.Points(brightGeo,new THREE.PointsMaterial({size:.12,vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.8}));
+starGroup.add(brightStars);
+
+// Globe Dots
+const dotCount=2500,dotGeo=new THREE.BufferGeometry(),dp=new Float32Array(dotCount*3),dc=new Float32Array(dotCount*3);
+for(let i=0;i<dotCount;i++){const phi=Math.acos(2*Math.random()-1),theta=Math.random()*Math.PI*2;dp[i*3]=R*Math.sin(phi)*Math.cos(theta);dp[i*3+1]=R*Math.sin(phi)*Math.sin(theta);dp[i*3+2]=R*Math.cos(phi);const lat=Math.abs(dp[i*3+2])/R;dc[i*3]=.15+lat*.2;dc[i*3+1]=.4+lat*.4;dc[i*3+2]=.6+lat*.4}
+dotGeo.setAttribute('position',new THREE.BufferAttribute(dp,3));dotGeo.setAttribute('color',new THREE.BufferAttribute(dc,3));
+const dots=new THREE.Points(dotGeo,new THREE.PointsMaterial({size:.025,vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false}));scene.add(dots);
+const dotOrig=new Float32Array(dp);
+
+// Atmosphere
+const atmGeo=new THREE.SphereGeometry(R+.15,64,64);
+scene.add(new THREE.Mesh(atmGeo,new THREE.ShaderMaterial({
+  vertexShader:`varying vec3 vN;void main(){vN=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+  fragmentShader:`varying vec3 vN;void main(){float i=pow(.65-dot(vN,vec3(0,0,1)),3.5);gl_FragColor=vec4(.2,.5,.9,i*.25);}`,
+  blending:THREE.AdditiveBlending,depthWrite:false,transparent:true
+})));
+
+// Grid
+const grid=new THREE.Group();scene.add(grid);
+for(let lat=-60;lat<=60;lat+=30){const phi=(90-lat)*Math.PI/180,r=R*Math.sin(phi),y=R*Math.cos(phi),pts=[];for(let i=0;i<=64;i++){const a=i/64*Math.PI*2;pts.push(new THREE.Vector3(r*Math.cos(a),y,r*Math.sin(a)))}grid.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x224466,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.3})))}
+for(let lng=0;lng<360;lng+=30){const pts=[];for(let i=0;i<=64;i++){const phi=i/64*Math.PI,a=lng*Math.PI/180;pts.push(new THREE.Vector3(R*Math.sin(phi)*Math.cos(a),R*Math.cos(phi),R*Math.sin(phi)*Math.sin(a)))}grid.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x224466,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.2})))}
+
+// Markers
+const sections=[{id:'about',label:'ABOUT',lat:40,lng:-70,color:0x64b4ff},{id:'tech',label:'TECH',lat:-30,lng:120,color:0xa78bfa},{id:'projects',label:'PROJECTS',lat:10,lng:30,color:0x34d399},{id:'life',label:'LIFE',lat:-45,lng:-40,color:0xf472b6},{id:'blog',label:'BLOG',lat:50,lng:150,color:0xf59e0b},{id:'contact',label:'CONTACT',lat:-15,lng:-150,color:0x06b6d4}];
+const markers=[],markerGroup=new THREE.Group();scene.add(markerGroup);
+document.getElementById('legend').innerHTML=sections.map(s=>`<div class="legend-item" onclick="clickLegend('${s.id}')"><span class="legend-dot" style="background:#${s.color.toString(16).padStart(6,'0')}"></span>${s.label}</div>`).join('');
+sections.forEach(s=>{const phi=(90-s.lat)*Math.PI/180,theta=s.lng*Math.PI/180,pos=new THREE.Vector3(R*Math.sin(phi)*Math.cos(theta),R*Math.cos(phi),R*Math.sin(phi)*Math.sin(theta));const ring=new THREE.Mesh(new THREE.TorusGeometry(.15,.02,8,24),new THREE.MeshBasicMaterial({color:s.color,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.8}));ring.position.copy(pos);ring.lookAt(0,0,0);const dot=new THREE.Mesh(new THREE.SphereGeometry(.06,8,8),new THREE.MeshBasicMaterial({color:s.color,blending:THREE.AdditiveBlending,depthWrite:false}));dot.position.copy(pos);markerGroup.add(ring);markerGroup.add(dot);markers.push({section:s,ring,dot,pos:pos.clone()})});
+
+// Arcs — full mesh
+const arcs=new THREE.Group(),arcCurves=[];scene.add(arcs);
+for(let i=0;i<markers.length;i++)for(let j=i+1;j<markers.length;j++){const a=markers[i].pos,b=markers[j].pos,mid=new THREE.Vector3().addVectors(a,b).multiplyScalar(.5).normalize().multiplyScalar(R*1.5),curve=new THREE.QuadraticBezierCurve3(a,mid,b);arcs.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(40)),new THREE.LineBasicMaterial({color:0x4466aa,blending:THREE.AdditiveBlending,depthWrite:false,transparent:true,opacity:.3})));arcCurves.push(curve)}
+
+// Flow particles
+const flowGeo=new THREE.BufferGeometry(),flowPos=new Float32Array(10*3);flowGeo.setAttribute('position',new THREE.BufferAttribute(flowPos,3));
+const flowDots=new THREE.Points(flowGeo,new THREE.PointsMaterial({size:.08,color:0x88ccff,blending:THREE.AdditiveBlending,depthWrite:false}));
+const flowGroup=new THREE.Group();scene.add(flowGroup);flowGroup.add(flowDots);
+const flowData=[];for(let i=0;i<10;i++)flowData.push({ci:0,t:Math.random(),speed:.005+Math.random()*.01});
+
+// Interaction
+let isDragging=false,prevX=0,prevY=0,rotX=.3,rotY=0,targetRotX=rotX,targetRotY=rotY,targetZoom=10,currentZoom=10,overlayOpen=false,hoveredMarker=null;
+const mouse=new THREE.Vector2();
+canvas.addEventListener('mousedown',e=>{if(overlayOpen)return;isDragging=true;prevX=e.clientX;prevY=e.clientY});
+window.addEventListener('mouseup',()=>{isDragging=false});
+window.addEventListener('mousemove',e=>{if(overlayOpen)return;if(isDragging){targetRotY+=(e.clientX-prevX)*.005;targetRotX+=(e.clientY-prevY)*.005;targetRotX=Math.max(-Math.PI/2,Math.min(Math.PI/2,targetRotX));prevX=e.clientX;prevY=e.clientY}mouse.x=(e.clientX/innerWidth)*2-1;mouse.y=-(e.clientY/innerHeight)*2+1;let found=null;markers.forEach(m=>{const wp=m.pos.clone().applyMatrix4(markerGroup.matrixWorld),sp=wp.clone().project(camera),sx=(sp.x*.5+.5)*innerWidth,sy=(-sp.y*.5+.5)*innerHeight;if(Math.hypot(e.clientX-sx,e.clientY-sy)<30&&sp.z<1)found=m});if(found!==hoveredMarker)hoveredMarker=found});
+canvas.addEventListener('click',e=>{if(isDragging||overlayOpen||!hoveredMarker)return;openSection(hoveredMarker.section)});
+
+// Touch
+canvas.addEventListener('touchstart',e=>{if(e.touches.length===1&&!overlayOpen){isDragging=true;prevX=e.touches[0].clientX;prevY=e.touches[0].clientY}});
+canvas.addEventListener('touchmove',e=>{if(isDragging&&e.touches.length===1){targetRotY+=(e.touches[0].clientX-prevX)*.005;targetRotX+=(e.touches[0].clientY-prevY)*.005;targetRotX=Math.max(-Math.PI/2,Math.min(Math.PI/2,targetRotX));prevX=e.touches[0].clientX;prevY=e.touches[0].clientY}});
+canvas.addEventListener('touchend',()=>{isDragging=false});
+
+// Overlay
+function openSection(s){overlayOpen=true;document.getElementById('hero').classList.add('hidden');document.getElementById('globe').classList.add('blurred');targetZoom=6;document.getElementById('ov-tag').textContent='// '+s.label;document.getElementById('ov-title').textContent=s.label.charAt(0)+s.label.slice(1).toLowerCase();const body=document.getElementById('ov-body');
+switch(s.id){
+case'about':body.innerHTML=`<strong>AI Infra · RL · LLM · Robotics · Embedded</strong><br><br>Building intelligent systems that <strong>play, learn, and control</strong> — from reinforcement learning game agents to quadruped robot control systems.<div class="overlay-stats"><div class="overlay-stat"><div class="overlay-stat-num" id="ov-repos">-</div><div class="overlay-stat-label">Repos</div></div><div class="overlay-stat"><div class="overlay-stat-num" id="ov-stars">-</div><div class="overlay-stat-label">Stars</div></div><div class="overlay-stat"><div class="overlay-stat-num">50+</div><div class="overlay-stat-label">Blog Articles</div></div></div>`;if(window._repos!=null){document.getElementById('ov-repos').textContent=window._repos;document.getElementById('ov-stars').textContent=window._stars}break;
+case'tech':body.innerHTML=`<div class="overlay-tech">${['Python','C++','C','PyTorch','TensorFlow','RAG','YOLO','OCR','ROS','STM32','Linux','Docker','MATLAB','HTML5','CSS3','JavaScript'].map(t=>`<span class="overlay-tech-item">${t}</span>`).join('')}</div>`;break;
+case'projects':body.innerHTML='<div style="text-align:center;color:#6688aa">Loading...</div>';if(window._projects)body.innerHTML=`<div class="overlay-projects">${window._projects.map(p=>`<a class="overlay-project" href="${p.url}" target="_blank"><div class="overlay-project-name">${p.name}</div><div class="overlay-project-desc">${p.desc||''}</div><div class="overlay-project-meta">${p.lang||''} · ⭐ ${p.stars}</div></a>`).join('')}</div>`;break;
+case'life':body.innerHTML=`<strong>🎮 Gaming</strong><br>CS2 · Terraria · Don't Starve · Riders Republic · Project Zomboid · Stardew Valley<br><br><strong>📺 Anime</strong><br>Attack on Titan · Fullmetal Alchemist · Steins;Gate · Cowboy Bebop · Vinland Saga · Arcane · Cyberpunk Edgerunners<br><br><strong>📚 Books</strong><br>毛泽东选集 · 无职转生<br><br><strong>🎵 Music</strong><br>On My Own<br><br><strong>📷 Photography</strong><br><a href="https://500px.com.cn/xuwithbean" target="_blank" style="color:#64b4ff">500px.com.cn/xuwithbean</a><br><br><strong>🌐 Social</strong><br><a href="https://space.bilibili.com/473401497" target="_blank" style="color:#64b4ff">Bilibili</a> · <a href="https://xhslink.com/m/7zitaqAGuHt" target="_blank" style="color:#64b4ff">小红书</a>`;break;
+case'blog':body.innerHTML=`Read my articles on <a href="https://www.cnblogs.com/xuwithbean" target="_blank" style="color:#64b4ff">cnblogs.com/xuwithbean</a>`;break;
+case'contact':body.innerHTML=`<strong>Email</strong><br>xuwithbean@qq.com<br><br><strong>GitHub</strong><br><a href="https://github.com/xuwithbean" target="_blank" style="color:#64b4ff">github.com/xuwithbean</a>`;break;
+}document.getElementById('overlay').classList.add('open')}
+function closeOverlay(){overlayOpen=false;document.getElementById('overlay').classList.remove('open');document.getElementById('globe').classList.remove('blurred');targetZoom=10;setTimeout(()=>{document.getElementById('hero').classList.remove('hidden')},500)}
+window.closeOverlay=closeOverlay;
+function clickLegend(id){const s=sections.find(s=>s.id===id);if(s)openSection(s)}
+window.clickLegend=clickLegend;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeOverlay()});
+
+// Cursor
+const cs=document.getElementById('cs'),ch=document.getElementById('ch');
+let cmx=innerWidth/2,cmy=innerHeight/2;
+document.addEventListener('mousemove',e=>{cmx=e.clientX;cmy=e.clientY});
+
+// Raycaster
+const hitSphere=new THREE.Mesh(new THREE.SphereGeometry(R,16,16)),raycaster=new THREE.Raycaster();
+
+// Animate
+let frames=0,fpsTime=0;
+function animate(){requestAnimationFrame(animate);const t=performance.now()*.001;
+rotX+=(targetRotX-rotX)*.05;rotY+=(targetRotY-rotY)*.05;currentZoom+=(targetZoom-currentZoom)*.04;
+markerGroup.rotation.x=rotX;markerGroup.rotation.y=rotY;
+dots.rotation.copy(markerGroup.rotation);grid.rotation.copy(markerGroup.rotation);arcs.rotation.copy(markerGroup.rotation);flowGroup.rotation.copy(markerGroup.rotation);
+camera.position.z=currentZoom;
+cs.style.left=cmx+'px';cs.style.top=cmy+'px';ch.style.left=cmx+'px';ch.style.top=cmy+'px';cs.classList.toggle('hover',!!hoveredMarker);
+
+// Star twinkle
+starData.forEach((s,i)=>{s.pts.material.size=s.baseSize+Math.sin(t*1.5+i)*.01});
+brightStars.material.size=.1+Math.sin(t*.6)*.04;
+
+// Dot drift
+const dArr=dots.geometry.attributes.position.array;
+for(let i=0;i<dotCount;i++){const idx=i*3;dArr[idx]+=(dotOrig[idx]-dArr[idx])*.015;dArr[idx+1]+=(dotOrig[idx+1]-dArr[idx+1])*.015;dArr[idx+2]+=(dotOrig[idx+2]-dArr[idx+2])*.015}
+dots.geometry.attributes.position.needsUpdate=true;
+
+// Arc pulse + flow
+arcs.children.forEach((a,i)=>{a.material.opacity=.2+Math.sin(t*1.2+i*.4)*.1});
+flowData.forEach((fp,i)=>{fp.t+=fp.speed;if(fp.t>1){fp.t=0;fp.ci=(fp.ci+1)%arcCurves.length}if(arcCurves[fp.ci]){const pt=arcCurves[fp.ci].getPoint(fp.t);flowPos[i*3]=pt.x;flowPos[i*3+1]=pt.y;flowPos[i*3+2]=pt.z}});
+flowDots.geometry.attributes.position.needsUpdate=true;
+
+// Raycast
+raycaster.setFromCamera(mouse,camera);const h=raycaster.intersectObject(hitSphere);
+if(h.length>0){const p=h[0].point,lat=90-Math.acos(p.y/R)*180/Math.PI,lng=Math.atan2(p.z,p.x)*180/Math.PI;document.getElementById('hudLat').textContent=lat.toFixed(1)+'°';document.getElementById('hudLng').textContent=lng.toFixed(1)+'°'}
+
+frames++;if(performance.now()-fpsTime>1000){document.getElementById('fps').textContent=Math.round(frames/((performance.now()-fpsTime)/1000));frames=0;fpsTime=performance.now()}
+markers.forEach((m,i)=>{m.ring.scale.setScalar(1+Math.sin(performance.now()*.003+i)*.15)});
+if(!isDragging&&!overlayOpen)targetRotY+=.001;
+renderer.render(scene,camera)}
+animate();
+window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+
+// Scroll Lever
+(function(){const lever=document.getElementById('lever'),track=document.getElementById('leverTrack'),card=document.querySelector('.overlay-card');if(!lever||!track||!card)return;let dragging=false,startY=0,startTop=0;function updateLever(){const ms=card.scrollHeight-card.clientHeight;if(ms<=0){track.classList.remove('visible');return}track.classList.add('visible');const r=card.scrollTop/ms,tH=track.clientHeight,thH=lever.clientHeight;lever.style.top=(r*Math.max(0,tH-thH))+'px'}function position(){const r=card.getBoundingClientRect();track.style.left=(r.right+16)+'px';track.style.top=(r.top+20)+'px';track.style.height=(r.height-40)+'px'}const obs=new MutationObserver(()=>{if(document.getElementById('overlay').classList.contains('open'))setTimeout(position,600)});obs.observe(document.getElementById('overlay'),{attributes:true,attributeFilter:['class']});window.addEventListener('resize',position);card.addEventListener('scroll',updateLever);lever.addEventListener('mousedown',e=>{dragging=true;startY=e.clientY;startTop=parseFloat(lever.style.top)||0;e.preventDefault()});document.addEventListener('mousemove',e=>{if(!dragging)return;const ms=card.scrollHeight-card.clientHeight,tH=track.clientHeight,thH=lever.clientHeight,mT=Math.max(0,tH-thH);let nt=startTop+(e.clientY-startY);nt=Math.max(0,Math.min(mT,nt));lever.style.top=nt+'px';card.scrollTop=(nt/mT)*ms});document.addEventListener('mouseup',()=>{dragging=false});setTimeout(updateLever,100);setTimeout(updateLever,600);new MutationObserver(updateLever).observe(card,{childList:true,subtree:true})})();
+
+// Data
+fetch('https://api.github.com/users/xuwithbean').then(r=>r.json()).then(u=>{document.getElementById('ghFollowers').textContent=u.followers||'--'});
+fetch('https://api.allorigins.win/raw?url='+encodeURIComponent('https://api.bilibili.com/x/relation/stat?vmid=473401497')).then(r=>r.json()).then(d=>{document.getElementById('blFollowers').textContent=(d.data?.follower||'--')}).catch(()=>{document.getElementById('blFollowers').textContent='...'});
+fetch('https://api.github.com/users/xuwithbean/repos?sort=stars&per_page=30').then(r=>r.json()).then(repos=>{window._repos=repos.length;window._stars=repos.reduce((s,r)=>s+r.stargazers_count,0);document.getElementById('hudRepos').textContent=repos.length;document.getElementById('hudStars').textContent=window._stars;const f=repos.filter(r=>!r.fork&&r.name!=='xuwithbean'&&r.name!=='xuwithbean.github.io');f.sort((a,b)=>b.stargazers_count-a.stargazers_count);window._projects=f.slice(0,9).map(r=>({name:r.name,desc:r.description,lang:r.language,stars:r.stargazers_count,url:r.html_url}))});
+</script>
 </body>
 </html>
